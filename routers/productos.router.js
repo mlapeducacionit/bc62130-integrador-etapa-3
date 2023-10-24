@@ -6,6 +6,7 @@ import controller from '../controllers/productos.controller.js'
 /* ------------------------------------------------ */
 /* CRUD -> CREATE | READ | UPDATE | DELETE          */
 /* ------------------------------------------------ */
+
 // ! GET ALL / ONE (READ) - request de todos los productos
 // http://localhost:8080/api/productos/ | GET
 
