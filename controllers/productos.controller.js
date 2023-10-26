@@ -1,4 +1,5 @@
 import models from '../models/productos.model.js'
+import handleError from '../utils/handleError.js'
 
 const obtenerProductos = async (req, res) => {
     let id = req.params.id
@@ -13,7 +14,7 @@ const obtenerProductos = async (req, res) => {
         }
     } catch (error) {
         console.log('No se pudo acceder a los productos', error)
-        res.status(500).send('[obtenerProductos]: No se pudo acceder a los productos')
+        handleError(res, `[obtenerProductos] ${error.message} - No se pudo acceder a los productos`)
     }
 }
 
@@ -26,8 +27,8 @@ const guardarProducto = async (req, res) => {
 
     res.status(201).json(productoGuardado)
    } catch (error) {
-    console.log('ERROR al guardar una película', error)
-    return res.status(500).send('Error al guardar una película')
+    console.log('ERROR al guardar una producto', error)
+    handleError(res, `[guardarProducto] ${error.message} - Error al guardar un producto`)
    }
 }
 
@@ -39,14 +40,15 @@ const actualizarProducto = async (req, res) => {
         const productoActualizado = await models.modificarProducto(id, producto)
         res.status(200).json(productoActualizado)
     } catch (error) {
-        console.log('No se pudo actualizar el producto', error)
-        res.status(500).send('No se pudo actualizar el producto')
+        const mensaje = 'No se pudo actualizar el producto'
+        console.log(mensaje, error)
+        handleError(res, `[actualizarProducto] ${error.message} - ${mensaje}`)
     }
 
 }
 
 const borrarProducto = async (req, res) => {
-    const { id } = req.params
+    const id = req.params.id // ObjectID
 
     console.log(id)
 
@@ -54,11 +56,10 @@ const borrarProducto = async (req, res) => {
         const productoBorrado = await models.eliminarProducto(id)
         res.status(200).json(productoBorrado)
     } catch (error) {
-        console.log('No se pudo', error)
-        res.status(500).send('No se pudo borrar el producto')
+        const mensaje = 'No se pudo borrar el producto'
+        console.log(mensaje, error)
+        handleError(res, `[borrarProducto]: ${error.message} - ${mensaje}`)
     }
-
-
 }
 
 export default {
