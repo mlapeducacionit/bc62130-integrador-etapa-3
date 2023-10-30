@@ -17,8 +17,8 @@ const corsConfig = {
 
 // ! CONEXIÓN MONGODB
 
-handleConnection(process.env.URI_MLOCAL)
-//handleConnection(process.env.URI_MREMOTA)
+//handleConnection(process.env.URI_MLOCAL)
+handleConnection(process.env.URI_MREMOTA)
 
 // ! Middlewares
 app.use(express.urlencoded({extended: true})) // Decodificar el body enviado desde un formulario
