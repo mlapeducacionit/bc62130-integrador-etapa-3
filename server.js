@@ -17,8 +17,8 @@ const corsConfig = {
 
 // ! CONEXIÓN MONGODB
 
-//handleConnection(process.env.URI_MLOCAL)
-handleConnection(process.env.URI_MREMOTA)
+handleConnection(process.env.URI_MLOCAL)
+//handleConnection(process.env.URI_MREMOTA)
 
 // ! Middlewares
 app.use(express.urlencoded({extended: true})) // Decodificar el body enviado desde un formulario
@@ -28,7 +28,7 @@ app.use(cors(corsConfig))
 // ! Rutas
 app.use('/api/productos', routerProductos)
 app.use('/api/upload', routerUpload)
-app.use('/api/carrito', routerCarrito)
+app.use('/api/carritos', routerCarrito)
 
 app.all('*', (req, res) => {
     res.status(404).send(`La ruta ${req.url} utilizando el ${req.method} no está disponible!`)
