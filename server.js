@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
+import path from 'node:path'
 
 import routerProductos from './routers/productos.router.js'
 import routerUpload from './routers/upload.router.js'
@@ -21,6 +22,7 @@ handleConnection(process.env.URI_MLOCAL)
 //handleConnection(process.env.URI_MREMOTA)
 
 // ! Middlewares
+app.use(express.static(path.join('public')))
 app.use(express.urlencoded({extended: true})) // Decodificar el body enviado desde un formulario
 app.use(express.json()) // Decodificar el body enviado desde un json
 app.use(cors(corsConfig))
